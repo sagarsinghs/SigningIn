@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "79865595596",
+    "firebase_url": "https://ashgeninter.firebaseio.com",
+    "project_id": "ashgeninter",
+    "storage_bucket": "ashgeninter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79865595596:android:d61e355738922f8b",
+        "android_client_info": {
+          "package_name": "sangamsagar.signingin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79865595596-2tib9kn5tup9f1t7c2h6jshgfemkmpa8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtWXZJwO1d1xNiN7MuhAl3qr5LUwrSilY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

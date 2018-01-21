@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sangamsagar.signingin.MainActivity">
+    <EditText
+        android:layout_width="300sp"
+        android:layout_marginTop="50sp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:id="@+id/username"
+        android:layout_marginLeft="20sp"
+
+        android:hint="Username"
+        android:textSize="18sp"/>
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:hint="password"
+        android:id="@+id/paassword"
+        android:inputType="textPassword"
+        android:layout_marginTop="22sp"
+        android:textSize="18sp"/>
+
+   <EditText
+       android:layout_width="300sp"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="20sp"
+       android:drawableLeft="@drawable/ic_email_black_24dp"
+       android:hint="Enter your Email"
+       android:id="@+id/email"
+       android:inputType="textEmailAddress"
+       android:layout_marginTop="22sp"
+       android:textSize="18sp"/>
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:id="@+id/phone"
+        android:hint="Phone Number"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
+        android:inputType="phone"
+        android:layout_marginTop="22sp"
+        android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22sp"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+
+       android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+       android:text="Gender"
+        android:textSize="15sp"/>
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gender"
+        android:layout_marginLeft="30sp">
+
+    </Spinner>
+</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="done"
+        android:background="#d67601"
+        android:textColor="#fff"
+        android:layout_marginLeft="100sp"
+        android:id="@+id/done"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:textColor="#0277BD"
+        android:layout_marginLeft="80sp"
+        android:textSize="20sp"
+        android:layout_marginTop="22sp"
+        android:text="Already a member?Login Here"/>
+
+</LinearLayout>
