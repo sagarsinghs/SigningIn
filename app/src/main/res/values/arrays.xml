@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="locations">
+        <item>Heritage Girls Hostel</item>
+        <item>Heritage Boys Hostel</item>
+        <item>Nazirabad Road</item>
+        <item>R.R. Plot</item>
+        <item>Hussainpur</item>
+        <item>Kalikapur</item>
+    </string-array>
+    <string-array name="locationValues">
+        <item>Heritage Girls Hostel</item>
+        <item>Heritage Boys Hostel</item>
+        <item>Nazirabad Road</item>
+        <item>RR Plot</item>
+        <item>Hussainpur</item>
+        <item>Kalikapur</item>
+    </string-array>
+
+
+
+</resources>

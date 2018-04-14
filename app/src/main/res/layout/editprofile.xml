@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+   android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_update"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:text = "Update  Your Profile "/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+       android:layout_marginLeft="30sp"
+        android:layout_marginTop="30sp"
+        android:id="@+id/name"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Mobile"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/mobile"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/username"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/update"
+        android:layout_gravity="center"
+        android:text="update"/>
+
+</LinearLayout>

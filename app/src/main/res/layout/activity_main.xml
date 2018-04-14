@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     tools:context="sangamsagar.signingin.MainActivity">
+
     <EditText
         android:layout_width="300sp"
-        android:layout_marginTop="50sp"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:id="@+id/username"
         android:layout_marginLeft="20sp"
-
+        android:paddingLeft="5px"
+        android:layout_marginTop="10sp"
         android:hint="Username"
         android:textSize="18sp"/>
     <EditText
@@ -24,7 +26,17 @@
         android:hint="password"
         android:id="@+id/paassword"
         android:inputType="textPassword"
-        android:layout_marginTop="22sp"
+
+        android:textSize="18sp"/>
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:hint="Reenter password"
+        android:id="@+id/paassword_verify"
+        android:inputType="textPassword"
+
         android:textSize="18sp"/>
 
    <EditText
@@ -35,7 +47,7 @@
        android:hint="Enter your Email"
        android:id="@+id/email"
        android:inputType="textEmailAddress"
-       android:layout_marginTop="22sp"
+
        android:textSize="18sp"/>
     <EditText
         android:layout_width="300sp"
@@ -45,12 +57,91 @@
         android:hint="Phone Number"
         android:drawableLeft="@drawable/ic_phone_black_24dp"
         android:inputType="phone"
-        android:layout_marginTop="22sp"
+
         android:textSize="18sp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22sp"
+        android:layout_marginTop="15sp"
+
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="100sp"
+            android:layout_height="40sp"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/ic_mode_edit_black_24dp"
+            android:id="@+id/click"
+            android:layout_marginLeft="20sp"
+            android:text="DOB->"/>
+
+         <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date"
+             android:layout_marginLeft="30sp"
+        android:hint="date"
+        android:textSize="18sp"/>
+    <!--<EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:id="@+id/date"
+        android:hint="dd"
+
+        android:inputType="phone"
+        android:textSize="18sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/month"
+            android:hint="mm"
+            android:inputType="phone"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/year"
+            android:hint="yyyy"
+            android:inputType="phone"
+            android:textSize="18sp"/>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:layout_marginLeft="15sp"
+            android:textSize="12sp"
+            android:text="PLEASE UPLOAD YOUR PHOTO"
+         />
+
+        <ImageButton
+            android:id="@+id/imageView"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:background="@mipmap/download"
+            android:scaleType="centerInside" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
@@ -60,6 +151,7 @@
        android:drawableLeft="@drawable/ic_person_outline_black_24dp"
        android:text="Gender"
         android:textSize="15sp"/>
+
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,24 +159,26 @@
         android:layout_marginLeft="30sp">
 
     </Spinner>
+
 </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="done"
         android:background="#d67601"
         android:textColor="#fff"
-        android:layout_marginLeft="100sp"
+        android:layout_gravity="center"
         android:id="@+id/done"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login"
-        android:textColor="#0277BD"
-        android:layout_marginLeft="80sp"
-        android:textSize="20sp"
-        android:layout_marginTop="22sp"
-        android:text="Already a member?Login Here"/>
+        android:textColor="#1E88E5"
+        android:textSize="18sp"
+        android:layout_marginTop="10sp"
+        android:layout_gravity="center"
+        android:text="Login Here"/>
 
 </LinearLayout>

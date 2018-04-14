@@ -4,85 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="#AED581"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     tools:context="sangamsagar.signingin.Loggedin">
 
 
-    <!-- This is a comment <LinearLayout
+    <ListView
+        android:id="@+id/messageListView"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginBottom="40sp"
+        android:layout_weight="8"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_marginLeft="20sp"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Hello "/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/name"
-        android:hint="name "/>
-</LinearLayout>
+        android:layout_above="@+id/linearLayout"
+        android:stackFromBottom="true"
+        android:background="@drawable/bg_msg_from"
+        android:dividerHeight="10sp"
+        android:divider="#FFFFFFFF"
+        android:transcriptMode="alwaysScroll"
+        tools:listitem="@layout/item_message"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:layout_marginLeft="20sp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your EmailId is "/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10sp"
+        android:layout_alignParentLeft="true"
 
-            android:textSize="20sp"
-            android:id="@+id/email"
-            android:hint="email "/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:layout_marginLeft="20sp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-            android:text="and your phone number is "/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <!--  <ProgressBar
+             android:id="@+id/progressBar"
 
-            android:textSize="20sp"
-            android:id="@+id/phone"
-            android:hint="phone "/>
-    </LinearLayout>
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true"/>-->
+         <EditText
+             android:id="@+id/messageEditText"
+             android:layout_width="0dp"
+             android:layout_marginRight="0dp"
+             android:layout_height="match_parent"
+             android:background="#ECEFF1"
+             android:textSize="17sp"
+             android:hint="Enter the message              "
+             android:gravity="right"
+             android:layout_weight="1" />
 
-    </LinearLayout-->
+         <Button
+             android:id="@+id/sendButton"
+             android:layout_width="wrap_content"
+
+             android:text="SEND"
+             android:layout_height="50sp"
+             android:layout_gravity="bottom"
+
+             />
+     </LinearLayout>
     <Button
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Signout"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="150sp"
-        android:background="#d67601"
-        android:textColor="#fff"
         android:id="@+id/signout"/>
-</LinearLayout>
+
+
+ </LinearLayout>
