@@ -224,10 +224,15 @@ public class AllRecording extends AppCompatActivity {
                     intent.putExtra("KeyMain",key_found);
                     intent.putExtra("key_recording_main",key_Recording1);
                     intent.putExtra("username_login",username_login);
+                Toast.makeText(AllRecording.this,"username_login  is " +  username_login,Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(AllRecording.this,"username_login  is " +  username_login,Toast.LENGTH_SHORT).show();
+
 
                 Toast.makeText(AllRecording.this,username_login,Toast.LENGTH_SHORT).show();
 
                     intent.putExtra("keys_recording",key_newest.getText().toString());
+                Toast.makeText(AllRecording.this,"keys recording is ----- " +key_newest.getText().toString(),Toast.LENGTH_SHORT).show();
 
                     startActivity(intent);
 

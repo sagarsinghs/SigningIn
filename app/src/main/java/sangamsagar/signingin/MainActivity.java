@@ -3,9 +3,11 @@ package sangamsagar.signingin;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         imageView =(ImageButton) findViewById(R.id.imageView);
 
         done = (Button) findViewById(R.id.done);
-        click = (Button) findViewById(R.id.click);
+        //click = (Button) findViewById(R.id.click);
 
         firebaseDatabase =FirebaseDatabase.getInstance();
         databaseReference =firebaseDatabase.getReference().child("newuser");
@@ -105,40 +107,34 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         firebaseAuth = FirebaseAuth.getInstance();
         gender.setOnItemSelectedListener(this);
 
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.username)).setTypeface(typeface);
 
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.email)).setTypeface(typeface);
 
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.paassword)).setTypeface(typeface);
 
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.paassword_verify)).setTypeface(typeface);
 
-
-
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.date)).setTypeface(typeface);
 
-
-
-
-        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Regular.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((EditText)findViewById(R.id.phone)).setTypeface(typeface);
 
 
-        typeface =Typeface.createFromAsset(getAssets(),"PomorskyUnicode.otf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((Button)findViewById(R.id.done)).setTypeface(typeface);
 
-        typeface =Typeface.createFromAsset(getAssets(),"PomorskyUnicode.ttf");
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((TextView)findViewById(R.id.login)).setTypeface(typeface);
 
         //firebaseStorage=FirebaseStorage.getInstance();
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         storageReference=FirebaseStorage.getInstance().getReference();
-
 
 
         ArrayAdapter newadapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,category);
@@ -163,11 +159,14 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             }
         };
 
-        click.setOnClickListener(new View.OnClickListener() {
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(MainActivity.this, date1,mycalendar.get(Calendar.YEAR), mycalendar.get(Calendar.MONTH),
                         mycalendar.get(Calendar.DAY_OF_MONTH)).show();
+               // String myFormat ="MM/dd/yyyy";
+               // SimpleDateFormat sdf =new SimpleDateFormat(myFormat, Locale.US);
+              //  click.setText(sdf.format(mycalendar.getTime()));
 
             }
         });
@@ -190,11 +189,32 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
                 phone1 = phone.getText().toString().trim();
 
+                if (isvalid(username1, email1, password1, phone1)== false)
+                {
+                    Toast.makeText(MainActivity.this,"Please enter the full details",Toast.LENGTH_SHORT).show();
+                    new CountDownTimer(5000, 50) {
 
+                        @Override
+                        public void onTick(long arg0) {
+                            // TODO Auto-generated method stub
+                            done.setBackgroundColor(Color.BLACK);
+                           // done.setTextColor(Color.);
+                        }
 
-                if (isvalid(username1, email1, password1, phone1)) {
+                        @Override
+                        public void onFinish() {
+                            done.setBackgroundColor(Color.GREEN);
+                        }
+                    }.start();
+
+                }
+
+               else  if (isvalid(username1, email1, password1, phone1)) {
+
                     if(!(isvalidpassword(password1,verify_password1)))
                     {
+                        done.setBackgroundColor(Color.BLUE);
+                        done.setTextColor(Color.GREEN);
                         Toast.makeText(MainActivity.this,"Please enter the correct password",Toast.LENGTH_SHORT).show();
                     }
                     else
@@ -221,7 +241,8 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
                                             databaseReference.child(key).child("photo").setValue(image);
                                             databaseReference.child(key).child("key").setValue(key);
 
-
+                                            done.setBackgroundColor(Color.WHITE);
+                                            done.setTextColor(Color.BLACK);
                                             databaseReference.child(key).child("date").setValue(date2);
 
                                             if (item.equals("male"))
@@ -354,6 +375,10 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     {
         String myFormat ="MM/dd/yyyy";
         SimpleDateFormat sdf =new SimpleDateFormat(myFormat, Locale.US);
+
+        typeface =Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((EditText)findViewById(R.id.date)).setTypeface(typeface);
+
         date.setText(sdf.format(mycalendar.getTime()));
     }
 

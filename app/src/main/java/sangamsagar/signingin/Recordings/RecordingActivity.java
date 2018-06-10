@@ -92,7 +92,7 @@ public class RecordingActivity extends AppCompatActivity {
         handler =new Handler();
     progressDialog = new ProgressDialog(this);
         buttonStart = (ImageButton) findViewById(R.id.button);
-        buttonStop = (Button) findViewById(R.id.button2);
+       // buttonStop = (Button) findViewById(R.id.button2);
         buttonPlayLastRecordAudio = (Button) findViewById(R.id.button3);
         buttonStopPlayingRecording = (Button)findViewById(R.id.button4);
 
@@ -118,17 +118,13 @@ public class RecordingActivity extends AppCompatActivity {
         databaseReference= firebaseDatabase.getReference().child("newuser");
         databaseReference2= firebaseDatabase.getReference().child("newuser");
 
-        buttonStop.setEnabled(false);
+       // buttonStop.setEnabled(false);
         buttonPlayLastRecordAudio.setEnabled(false);
         buttonStopPlayingRecording.setEnabled(false);
 
-
-
-
-
         random = new Random();
-checkPermission();
-requestPermission();
+        checkPermission();
+        requestPermission();
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,7 +152,7 @@ requestPermission();
                     }
 
                     buttonStart.setEnabled(false);
-                    buttonStop.setEnabled(true);
+                    //buttonStop.setEnabled(true);
 
 
                     Toast.makeText(RecordingActivity.this, "Recording started",
@@ -168,85 +164,7 @@ requestPermission();
             }
         });
 
-        buttonStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                mediaRecorder.stop();
-
-
-                TimeBuff += MillisecondTime;
-
-                handler.removeCallbacks(runnable);
-                buttonStop.setEnabled(false);
-                buttonPlayLastRecordAudio.setEnabled(true);
-                buttonStart.setEnabled(true);
-                buttonStopPlayingRecording.setEnabled(false);
-
-               stopwatch.setText("00:00:00");
-                final EditText edittext = new EditText(RecordingActivity.this);
-                alert.setMessage("Enter Your Voice Name");
-                alert.setTitle(" Your Recording");
-
-                alert.setView(edittext);
-
-
-                alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //What ever you want to do with the value
-                        // Editable YouEditTextValue = edittext.getText();
-                        //OR
-                         YouEditTextValue = edittext.getText().toString();
-
-
-                    }
-                });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // what ever you want to do with No option.
-                    }
-                });
-
-                alert.show();
-                flag=1;
-
-
-                Toast.makeText(RecordingActivity.this, "Recording Completed",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        buttonPlayLastRecordAudio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalArgumentException,
-                    SecurityException, IllegalStateException {
-
-
-                buttonStop.setEnabled(false);
-                buttonStart.setEnabled(false);
-                buttonStopPlayingRecording.setEnabled(true);
-
-
-                mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(AudioSavePathInDevice);
-                    // RecordingActivityObject recordingActivityObject = new RecordingActivityObject(AudioSavePathInDevice);
-                    // recordingActivityAdapter.add(recordingActivityObject);
-
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                mediaPlayer.start();
-                Toast.makeText(RecordingActivity.this, "Recording Playing",
-                        Toast.LENGTH_LONG).show();
-
-
-
-            }
-        });
 
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -261,7 +179,6 @@ requestPermission();
                     buttonStopPlayingRecording.setEnabled(false);
                     mediaRecorder.stop();
 
-
                     TimeBuff += MillisecondTime;
 
                     handler.removeCallbacks(runnable);
@@ -269,18 +186,83 @@ requestPermission();
                     final EditText edittext = new EditText(RecordingActivity.this);
                     alert.setMessage("Enter Your Voice Name");
                     alert.setTitle(" Your Recording");
-
                     alert.setView(edittext);
 
                     flag = 0;
                     alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            //What ever you want to do with the value
-                            // Editable YouEditTextValue = edittext.getText();
-                            //OR
                             YouEditTextValue = edittext.getText().toString();
 
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    for(DataSnapshot dsp : dataSnapshot.getChildren())
+                                    {
+                                        key = dsp.getKey();
+                                        String email2 =(String) dataSnapshot.child(key).child("email").getValue();
+
+                                        if(email2.equals(email1))
+                                        {
+                                            final String key2 = databaseReference.push().getKey();
+
+                                            StorageMetadata metadata = new StorageMetadata.Builder()
+                                                    .setContentType("audio/mpeg")
+                                                    .build();
+                                            String s = AudioSavePathInDevice;
+                                            int length = s.length();
+                                            int length_new = length - 23;
+                                            //Toast.makeText(AllRecording.this, Integer.toString(length_new), Toast.LENGTH_SHORT).show();
+                                            String kim = s.substring(length_new, length_new+5);
+                                            progressDialog.setMessage("Uploading started");
+                                            StorageReference storageReference = mstoragereference.child("Media").child("Audio.3gp"+kim);
+                                            Uri uri = Uri.fromFile(new File(AudioSavePathInDevice));
+
+
+                                            storageReference.putFile(uri,metadata).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    progressDialog.dismiss();
+
+                                                    downloaduri = taskSnapshot.getDownloadUrl();
+                                                    uri1 = downloaduri.toString();
+
+                                                    databaseReference.child(key).child("Recording").child(key2).child("voice").setValue(uri1);
+                                                    progressDialog.setMessage("uploading finished");
+                                                    //Toast.makeText(RecordingActivity.this,"RecordingFinished",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+
+                                            databaseReference.child(key).child("Recording").child(key2).child("stopwatch").setValue(Long.toString(TimeBuff));
+                                            databaseReference.child(key).child("Recording").child(key2).child("key").setValue(key2);
+                                            databaseReference.child(key).child("Recording").child(key2).child("recordingname").setValue(YouEditTextValue);
+                                            databaseReference.child(key).child("Recording").child(key2).child("keyparent").setValue(key);
+
+                                            MillisecondTime = 0L ;
+                                            StartTime = 0L ;
+                                            TimeBuff = 0L ;
+                                            UpdateTime = 0L ;
+                                            Seconds = 0 ;
+                                            Minutes = 0 ;
+                                            MilliSeconds = 0 ;
+
+                                            Toast.makeText(RecordingActivity.this, "Your voice has been saved",
+                                                    Toast.LENGTH_LONG).show();
+                                            uploadOnFirebase(AudioSavePathInDevice);
+
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         }
                     });
 
@@ -291,86 +273,9 @@ requestPermission();
                     });
 
                     alert.show();
-                    buttonStop.setEnabled(false);
-                }
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-
-
-
-
-                String key2 = databaseReference.push().getKey();
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    for(DataSnapshot dsp : dataSnapshot.getChildren())
-                    {
-
-
-
-                        key = dsp.getKey();
-                        String email2 =(String) dataSnapshot.child(key).child("email").getValue();
-
-                        if(email2.equals(email1))
-                        {
-
-
-                            StorageMetadata metadata = new StorageMetadata.Builder()
-                                    .setContentType("audio/mpeg")
-                                    .build();
-                            String s = AudioSavePathInDevice;
-                            int length = s.length();
-                            int length_new = length - 23;
-                            //Toast.makeText(AllRecording.this, Integer.toString(length_new), Toast.LENGTH_SHORT).show();
-                            String kim = s.substring(length_new, length_new+5);
-                            progressDialog.setMessage("Uploading started");
-                            StorageReference storageReference = mstoragereference.child("Media").child("Audio.3gp"+kim);
-                            Uri uri = Uri.fromFile(new File(AudioSavePathInDevice));
-
-
-                            storageReference.putFile(uri,metadata).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    progressDialog.dismiss();
-
-                                    downloaduri = taskSnapshot.getDownloadUrl();
-                                    uri1 = downloaduri.toString();
-
-                                    databaseReference.child(key).child("Recording").child(key2).child("voice").setValue(uri1);
-                                    progressDialog.setMessage("uploading finished");
-                                    //Toast.makeText(RecordingActivity.this,"RecordingFinished",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
-                            databaseReference.child(key).child("Recording").child(key2).child("stopwatch").setValue(Long.toString(TimeBuff));
-                            databaseReference.child(key).child("Recording").child(key2).child("keyvalue").setValue(key2);
-
-                            MillisecondTime = 0L ;
-                            StartTime = 0L ;
-                            TimeBuff = 0L ;
-                            UpdateTime = 0L ;
-                            Seconds = 0 ;
-                            Minutes = 0 ;
-                            MilliSeconds = 0 ;
-
-                            databaseReference.child(key).child("Recording").child(key2).child("recordingname").setValue(YouEditTextValue);
-                            databaseReference.child(key).child("Recording").child(key2).child("keyparent").setValue(key);
-
-                            Toast.makeText(RecordingActivity.this, "Your voice has been saved",
-                                    Toast.LENGTH_LONG).show();
-                            uploadOnFirebase(AudioSavePathInDevice);
-
-                            break;
-                        }
-                    }
+                    //buttonStop.setEnabled(false);
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
 
 
 
@@ -389,7 +294,7 @@ requestPermission();
         buttonStopPlayingRecording.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonStop.setEnabled(false);
+               // buttonStop.setEnabled(false);
                 buttonStart.setEnabled(true);
                 buttonStopPlayingRecording.setEnabled(false);
                 buttonPlayLastRecordAudio.setEnabled(true);

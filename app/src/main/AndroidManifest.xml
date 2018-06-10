@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name=".Recordings.StartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,7 +42,10 @@
         <activity android:name=".Recordings.RecordingActivity" />
         <activity android:name=".Recordings.RecordingActivityList" />
         <activity android:name=".Recordings.AllRecording" />
-        <activity android:name=".Recordings.VoiceBackground"></activity>
+        <activity android:name=".Recordings.VoiceBackground" />
+        <activity android:name=".Recordings.CommentsActivity" />
+        <activity android:name=".Login" />
+        <activity android:name=".ForgotActivity"></activity>
     </application>
 
 </manifest>

@@ -73,19 +73,19 @@ public class Login extends AppCompatActivity {
       // Typeface typeface = Typeface.createFromAsset(getAssets(),"RursusCompactMono.ttf");
        // ((TextView)findViewById(R.id.textview1)).setTypeface(typeface);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"RursusCompactMono.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((TextView)findViewById(R.id.editText_email)).setTypeface(typeface);
 
-         typeface = Typeface.createFromAsset(getAssets(),"RursusCompactMono.ttf");
+         typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((TextView)findViewById(R.id.editText_password)).setTypeface(typeface);
 
-        typeface = Typeface.createFromAsset(getAssets(),"PomorskyUnicode.otf");
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((Button)findViewById(R.id.button_login)).setTypeface(typeface);
 
-        typeface = Typeface.createFromAsset(getAssets(),"PomorskyUnicode.ttf");
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((TextView)findViewById(R.id.button_SignUP)).setTypeface(typeface);
 
-        typeface = Typeface.createFromAsset(getAssets(),"ArchitectsDaughter.ttf");
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
         ((TextView)findViewById(R.id.forgetpassword)).setTypeface(typeface);
 
 
@@ -111,7 +111,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Boolean s = checkedittextempty_forgetpassword();
+                startActivity(new Intent(Login.this,ForgotActivity.class));
+               /* Boolean s = checkedittextempty_forgetpassword();
                 if(s==true) {
 
                     final String newuser = email.getText().toString();
@@ -129,7 +130,7 @@ public class Login extends AppCompatActivity {
                             });
                 }
                 else
-                    Toast.makeText(Login.this, "Please enter the valid emailId", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Please enter the valid emailId", Toast.LENGTH_SHORT).show();*/
             }
         });
 
