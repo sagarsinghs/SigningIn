@@ -1,13 +1,17 @@
 package sangamsagar.signingin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,116 +19,200 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
-    EditText password,username;
-    Button login;
-    TextView register;
+    // Creating EditText.
+    EditText email, password ;
+    LinearLayout colorchange;
+    TextView forgetpasswod,textview1;
+    String email2;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-int flag=0;
-     String  username_login;
 
-    public void onBackPressed() {
-        //  super.onBackPressed();
-        moveTaskToBack(true);
 
-    }
+    String EmailHolder, PasswordHolder,userHolder;
 
+    // Creating buttons.
+    Button Login;
+    TextView SignUP;
+
+    // Creating progress dialog.
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object.
+    FirebaseAuth firebaseAuth;
+    String user,mobile,gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
-        final FirebaseUser user= firebaseAuth.getCurrentUser();
-
         setContentView(R.layout.activity_login);
-
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("newuser");
+        colorchange = (LinearLayout) findViewById(R.id.colorchange);
+        //colorchange.setBackgroundColor(Color.WHITE);
+        // Assign ID's to EditText.
+        email = (EditText) findViewById(R.id.editText_email);
+        password = (EditText) findViewById(R.id.editText_password);
 
-        password =(EditText) findViewById(R.id.password_login);
-        username =(EditText ) findViewById(R.id.username_login);
-        register =(TextView) findViewById(R.id.register);
-
-        login = (Button) findViewById(R.id.login);
+        forgetpasswod = (TextView) findViewById(R.id.forgetpassword);
 
 
+        //textview1 = (TextView) findViewById(R.id.textview1);
+
+        // Assign ID's to button.
+        Login = (Button) findViewById(R.id.button_login);
+        SignUP = (TextView) findViewById(R.id.button_SignUP);
+
+        progressDialog = new ProgressDialog(Login.this);
+
+      // Typeface typeface = Typeface.createFromAsset(getAssets(),"RursusCompactMono.ttf");
+       // ((TextView)findViewById(R.id.textview1)).setTypeface(typeface);
+
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((TextView)findViewById(R.id.editText_email)).setTypeface(typeface);
+
+         typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((TextView)findViewById(R.id.editText_password)).setTypeface(typeface);
+
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((Button)findViewById(R.id.button_login)).setTypeface(typeface);
+
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((TextView)findViewById(R.id.button_SignUP)).setTypeface(typeface);
+
+        typeface = Typeface.createFromAsset(getAssets(),"Grundschrift-Bold.ttf");
+        ((TextView)findViewById(R.id.forgetpassword)).setTypeface(typeface);
 
 
-        register.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        finish();
-        startActivity(new Intent(Login.this,MainActivity.class));
-    }
-});
-
+        // Assign FirebaseAuth instance to FirebaseAuth object.
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //final String newemail=  "sangamsagar626@gmail.com";
 
-                    login.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
 
-                            if(user != null){
-                                //user signed-in
+        if (firebaseAuth.getCurrentUser() != null) {
+            finish();
+             email2 = firebaseAuth.getCurrentUser().getEmail();
+            Intent intent = new Intent(Login.this,NavigationActivity.class);
 
-                                Toast.makeText(Login.this, "You are Signed-in.Welcome to Friendly Chat App.",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login.this,Loggedin.class));
-                            } else {
-                                username_login = username.getText().toString();
-                                String password_login = password.getText().toString();
-                                if (TextUtils.isEmpty(username_login) || TextUtils.isEmpty(password_login)) {
-                                    Toast.makeText(Login.this, "Please fill the empty field", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    firebaseAuth.signInWithEmailAndPassword(username_login, password_login).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
+            intent.putExtra("emailid",email2);
+            Log.e("login",email2);
+            Toast.makeText(Login.this,email2,Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            finish();
+        }
 
-                                            if (task.isSuccessful()) {
-                                                databaseReference.addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                                                            String key = dataSnapshot.getKey().toString();
-                                                            //Toast.makeText(Login.this, key, Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
+        forgetpasswod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                                                    @Override
-                                                    public void onCancelled(DatabaseError databaseError) {
+                startActivity(new Intent(Login.this,ForgotActivity.class));
+               /* Boolean s = checkedittextempty_forgetpassword();
+                if(s==true) {
 
-                                                    }
-                                                });
-                                                Toast.makeText(Login.this, "You are successfully logged in", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                                Intent i = new Intent(Login.this, Loggedin.class);
-                                                i.putExtra("email", username_login);
-                                                startActivity(i);
-                                            } else {
-                                                Toast.makeText(Login.this, "LoginFailed,Try again", Toast.LENGTH_SHORT).show();
-                                            }
+                    final String newuser = email.getText().toString();
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(newuser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 
-                                        }
-                                    });
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(Login.this, "forget password on complete", Toast.LENGTH_SHORT).show();
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Login.this, "Email Sent", Toast.LENGTH_SHORT).show();
+
+                                    }
                                 }
-                            }
-                        }
-                    });
+                            });
+                }
+                else
+                    Toast.makeText(Login.this, "Please enter the valid emailId", Toast.LENGTH_SHORT).show();*/
+            }
+        });
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //checking if the emailid is empty or not
+                Boolean s = checkedittextempty();
+                if(s==true)
+                {
+                    loginfunction();
+                }
+                else
+                {
+                    Toast.makeText(Login.this,"Please fill the Correct details",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        SignUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this,MainActivity.class));
+            }
+        });
+    }
+public  void loginfunction()
+{
+    progressDialog.setMessage("please wait till the login opens");
+    progressDialog.show();
+
+    firebaseAuth.signInWithEmailAndPassword(EmailHolder,PasswordHolder).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+            if(task.isSuccessful())
+            {
+                progressDialog.dismiss();
+                finish();
+                String email1 = firebaseAuth.getCurrentUser().getEmail();
+                Intent intent = new Intent(Login.this,NavigationActivity.class);
+
+                intent.putExtra("emailid",email1);
+                startActivity(intent);
+            }
+            else
+            {
+                progressDialog.dismiss();
+                Toast.makeText(Login.this,"Sorry,Try again",Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
 
 
+}
 
+                    public Boolean checkedittextempty() {
+                        EmailHolder = email.getText().toString();
+                        PasswordHolder = password.getText().toString();
 
+                        if (TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)) {
+                            return false;
+                        } else
+                            return true;
+                    }
 
+                    //for forget password checking
+             public Boolean checkedittextempty_forgetpassword() {
+            EmailHolder = email.getText().toString();
 
+        if (TextUtils.isEmpty(EmailHolder)) {
+            return false;
+        } else
+            return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);;
     }
 }

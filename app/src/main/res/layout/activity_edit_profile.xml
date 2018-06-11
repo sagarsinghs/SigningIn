@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_update"
+        android:textSize="26sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50sp"
+        android:text = "Update  Your Profile "/>
+
+
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:hint="Mobile"
+        android:inputType="phone"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/mobile"/>
+
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/username"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
+    android:id="@+id/layout1"
+    android:orientation="horizontal">
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/date_change"
+    android:layout_marginLeft="30sp"
+    android:text="date"/>
+    <EditText
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="10sp"
+        android:id="@+id/date"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="40sp"
+        android:layout_below="@+id/layout1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/gender_change"
+            android:text="Gender"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="M/F"
+            android:layout_marginLeft="30sp"
+
+            android:id="@+id/gender"/>
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/male"
+            android:layout_marginLeft="30sp"
+            android:text="M"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"/>
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/female"
+
+            android:text="F"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:id="@+id/imageView"
+        android:background="@mipmap/download"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/update"
+        android:textColor="#CE93D8"
+        android:layout_marginTop="25sp"
+        android:layout_gravity="center"
+        android:text="update"/>
+
+</LinearLayout>

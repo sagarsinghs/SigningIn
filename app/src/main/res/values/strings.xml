@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">SigningIn</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Preferences -->
+    <string name="pref_profile_information">Profile Information </string>
+    <string name="pref_mobile">Mobile Number</string>
+    <string name="pref_birth">Date  Of Birth</string>
+    <string name="pref_gender">Gender</string>
+    <string name="pref_name">Name</string>
+
+
+    <string name="pref_name_default_key" translatable="false"></string>
+    <string name="pref_mobile_default_key" translatable="false"></string>
+    <string name="pref_birth_default_key" translatable="false"></string>
+    <string name="pref_gender_default_key" translatable="false"></string>
+
+
+    <string name="pref_mobile_mobile_key" translatable="false">pref_mobile_key</string>
+    <string name="pref_birth_key" translatable="false">pref_birth_key</string>
+    <string name="pref_gender_gender_key" translatable="false">pref_gender_key</string>
+    <string name="pref_name_key" translatable="false">pref_name_key</string>
+
+
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/pref_profile_information">
+    <EditTextPreference
+        android:defaultValue="@string/pref_name_default_key"
+        android:key="@string/pref_name_key"
+        android:title="@string/pref_name"
+        android:selectAllOnFocus="true">
+
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title="@string/pref_mobile"
+        android:defaultValue="@string/pref_mobile_default_key"
+        android:key="@string/pref_mobile_mobile_key"
+        android:selectAllOnFocus="true">
+
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title="@string/pref_birth"
+        android:defaultValue="@string/pref_birth_default_key"
+        android:key="@string/pref_birth_key"
+        android:inputType="numberDecimal"
+        android:selectAllOnFocus="true">
+
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title="@string/pref_gender"
+        android:defaultValue="@string/pref_gender_default_key"
+        android:key="@string/pref_gender_gender_key"
+
+        android:selectAllOnFocus="true">
+
+    </EditTextPreference>
+
+
+
+
+</PreferenceScreen>
